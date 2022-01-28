@@ -10,6 +10,7 @@ import CardInputForm from "../../components/CardInputForm";
 import palette from "../../styles/global/palette";
 import Modal from "../../components/Modal";
 import CardCompanyList from "../../components/CardCompanyList";
+import ModalPortal from "../../components/Modal/ModalPortal";
 
 const CardAdd = props => {
 	const {
@@ -86,13 +87,15 @@ const CardAdd = props => {
 				<TextButton type="submit" content="다음" color="#04C09E" />
 			</CardInputForm>
 			{isModalOn && (
-				<Modal setIsModalOn={setIsModalOn}>
-					<CardCompanyList
-						setIsModalOn={setIsModalOn}
-						setCardName={setCardName}
-						ref={refsObj}
-					/>
-				</Modal>
+				<ModalPortal>
+					<Modal setIsModalOn={setIsModalOn}>
+						<CardCompanyList
+							setIsModalOn={setIsModalOn}
+							setCardName={setCardName}
+							ref={refsObj}
+						/>
+					</Modal>
+				</ModalPortal>
 			)}
 		</div>
 	);

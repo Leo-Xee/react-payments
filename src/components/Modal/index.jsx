@@ -7,7 +7,6 @@ const Modal = props => {
 	const { children, setIsModalOn } = props;
 
 	const onClose = e => {
-		if (e.target !== e.currentTarget) return;
 		setIsModalOn(false);
 	};
 

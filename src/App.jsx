@@ -67,6 +67,7 @@ const App = () => {
 					/>
 				)}
 				{page === DONE && <CardDone setPage={setPage} />}
+				<div id="modal"></div>
 			</div>
 		</div>
 	);
