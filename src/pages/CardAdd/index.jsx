@@ -6,9 +6,13 @@ import TextButton from "../../components/TextButton";
 import { DONE, LIST, SECOND } from "../../config/constant";
 import BackButton from "../../components/BackButton";
 import Card from "../../components/Card";
-import CardInputForm from "../../components/CardInputForm";
 import palette from "../../styles/global/palette";
 import Modal from "../../components/Modal";
+import CardNumberInput from "../../components/CardNumberInput";
+import CardExpirationDateInput from "../../components/CardExpirationDateInput";
+import CardOwnerInput from "../../components/CardOwnerInput";
+import CardSecureCodeInput from "../../components/CardSecureCodeInput";
+import CardPasswordInput from "../../components/CardPasswordInput";
 import CardCompanyList from "../../components/CardCompanyList";
 import ModalPortal from "../../components/Modal/ModalPortal";
 
@@ -54,6 +58,11 @@ const CardAdd = props => {
 		cardPasswordRef: useRef(null),
 	};
 
+	const onSubmit = e => {
+		e.preventDefault();
+		onNext();
+	};
+
 	return (
 		<div className="app">
 			<S.Header>
@@ -70,22 +79,42 @@ const CardAdd = props => {
 					cardExpirationDate={cardExpirationDate}
 				/>
 			</S.CardBox>
-			<CardInputForm
-				cardNumber={cardNumber}
-				onChangeCardNumber={onChangeCardNumber}
-				cardOwner={cardOwner}
-				onChangeCardOwner={onChangeCardOwner}
-				cardExpirationDate={cardExpirationDate}
-				onChangeCardExpirationDate={onChangeCardExpirationDate}
-				cardSecureCode={cardSecureCode}
-				onChangeCardSecureCode={onChangeCardSecureCode}
-				cardPassword={cardPassword}
-				onChangeCardPassword={onChangeCardPassword}
-				onNext={onNext}
-				ref={refsObj}
-			>
-				<TextButton type="submit" content="다음" color="#04C09E" />
-			</CardInputForm>
+			<S.Form onSubmit={onSubmit}>
+				<CardNumberInput
+					label="카드 번호"
+					cardNumber={cardNumber}
+					onChangeCardNumber={onChangeCardNumber}
+					ref={refsObj}
+				/>
+				<CardExpirationDateInput
+					label="만료일"
+					cardExpirationDate={cardExpirationDate}
+					onChangeCardExpirationDate={onChangeCardExpirationDate}
+					ref={refsObj}
+				/>
+				<CardOwnerInput
+					label="카드 소유자 이름 (선택)"
+					width="318px"
+					cardOwner={cardOwner}
+					onChangeCardOwner={onChangeCardOwner}
+					ref={refsObj}
+				/>
+				<CardSecureCodeInput
+					label="보안 코드(CCV/CVV)"
+					cardSecureCode={cardSecureCode}
+					onChangeCardSecureCode={onChangeCardSecureCode}
+					ref={refsObj}
+				/>
+				<CardPasswordInput
+					label="카드 비밀번호"
+					cardPassword={cardPassword}
+					onChangeCardPassword={onChangeCardPassword}
+					ref={refsObj}
+				/>
+				<S.ButtonBox>
+					<TextButton type="submit" content="다음" color="#04C09E" />
+				</S.ButtonBox>
+			</S.Form>
 			{isModalOn && (
 				<ModalPortal>
 					<Modal setIsModalOn={setIsModalOn}>

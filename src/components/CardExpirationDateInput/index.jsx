@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 import InputWrapper from "../InputWrapper";
-import { MONTH, YEAR } from "../../../config/constant";
+import { MONTH, YEAR } from "../../config/constant";
 import * as S from "./style";
 
 const CardExpirationDateInput = React.forwardRef((props, ref) => {

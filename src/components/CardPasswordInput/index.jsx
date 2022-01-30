@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
-import { FIRST, SECOND } from "../../../config/constant";
+import { FIRST, SECOND } from "../../config/constant";
 
 const CardPasswordInput = React.forwardRef((props, ref) => {
 	const { label, cardPassword, onChangeCardPassword } = props;

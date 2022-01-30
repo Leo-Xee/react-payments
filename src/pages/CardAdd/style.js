@@ -15,3 +15,14 @@ export const CardBox = styled.div`
 	align-items: center;
 	margin: 20px 0;
 `;
+
+export const Form = styled.form`
+	& > div:not(:last-child) {
+		margin-bottom: 12px;
+	}
+`;
+
+export const ButtonBox = styled.div`
+	display: flex;
+	justify-content: end;
+`;

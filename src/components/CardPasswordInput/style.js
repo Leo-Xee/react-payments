@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SecureDot from "../../../assets/circle-solid.svg";
+import SecureDot from "../../assets/circle-solid.svg";
 import { DefalutStyledInput } from "../InputWrapper/style";
 
 export const LayoutWrapper = styled.div`

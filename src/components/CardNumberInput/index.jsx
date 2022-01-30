@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
-import { FIRST, FOURTH, SECOND, THIRD } from "../../../config/constant";
+import { FIRST, FOURTH, SECOND, THIRD } from "../../config/constant";
 import InputWrapper from "../InputWrapper";
 import * as S from "./style";
 

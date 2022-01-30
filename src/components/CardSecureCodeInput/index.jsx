@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
-import QuestionMark from "../../../assets/question-circle-regular.svg";
+import QuestionMark from "../../assets/question-circle-regular.svg";
 import InputWrapper from "../InputWrapper";
-import ToolTip from "../../ToolTip";
+import ToolTip from "../ToolTip";
 
 const CardSecureCodeInput = React.forwardRef((props, ref) => {
 	const { label, cardSecureCode, onChangeCardSecureCode } = props;
