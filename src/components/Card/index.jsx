@@ -3,24 +3,18 @@ import PropTypes from "prop-types";
 
 import * as S from "./style";
 import palette from "../../styles/global/palette";
-import {
-	FIRST,
-	FOURTH,
-	MONTH,
-	SECOND,
-	THIRD,
-	YEAR,
-} from "../../config/constant";
 
-const Card = props => {
+const Card = ({ cardInfo, size, backgroundColor }) => {
 	const {
-		cardName,
-		cardNumber,
-		cardOwner,
-		cardExpirationDate,
-		size,
-		backgroundColor,
-	} = props;
+		name,
+		firstNum,
+		secondNum,
+		thirdNum,
+		fourthNum,
+		owner,
+		monthExpiration,
+		yearExpiration,
+	} = cardInfo;
 
 	const changeToSecureCode = numbers => {
 		return "*".repeat(numbers.length);
@@ -28,28 +22,23 @@ const Card = props => {
 
 	return (
 		<S.Card size={size} backgroundColor={backgroundColor}>
-			<S.CardName>{cardName && `${cardName} 카드`}</S.CardName>
+			<S.CardName>{name && `${name} 카드`}</S.CardName>
 			<S.Chip />
 			<S.CardNumber>
-				{`${cardNumber[FIRST]}  ${cardNumber[SECOND]} 
-				 ${changeToSecureCode(cardNumber[THIRD])}  
-			   ${changeToSecureCode(cardNumber[FOURTH])}`}
+				{`${firstNum}  ${secondNum} 
+				 ${changeToSecureCode(thirdNum)}  
+			   ${changeToSecureCode(fourthNum)}`}
 			</S.CardNumber>
-			<S.CardOwner>{cardOwner || "NAME"}</S.CardOwner>
+			<S.CardOwner>{owner || "NAME"}</S.CardOwner>
 			<S.CardExpirationDate>
-				{`${cardExpirationDate[MONTH] || "MM"}/${
-					cardExpirationDate[YEAR] || "YY"
-				}`}
+				{`${monthExpiration || "MM"}/${yearExpiration || "YY"}`}
 			</S.CardExpirationDate>
 		</S.Card>
 	);
 };
 
 Card.propTypes = {
-	cardName: PropTypes.string.isRequired,
-	cardNumber: PropTypes.objectOf(PropTypes.string),
-	cardOwner: PropTypes.string.isRequired,
-	cardExpirationDate: PropTypes.objectOf(PropTypes.string),
+	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
 	size: PropTypes.string.isRequired,
 	backgroundColor: PropTypes.string,
 };

@@ -6,10 +6,7 @@ import CardButton from "../../components/CardButton";
 import { ADD } from "../../config/constant";
 import Card from "../../components/Card";
 
-const CardList = props => {
-	const { cardName, cardNumber, cardOwner, cardExpirationDate, setPage } =
-		props;
-
+const CardList = ({ setPage, cardInfo }) => {
 	const onClick = () => {
 		setPage(ADD);
 	};
@@ -20,13 +17,7 @@ const CardList = props => {
 				<h1 className="page-title">보유카드</h1>
 			</StyledHeader>
 			<CardBox>
-				<Card
-					size="small"
-					cardName={cardName}
-					cardNumber={cardNumber}
-					cardOwner={cardOwner}
-					cardExpirationDate={cardExpirationDate}
-				/>
+				<Card size="small" cardInfo={cardInfo} />
 			</CardBox>
 			<CardBox>
 				<CardButton onClick={onClick} />
@@ -55,10 +46,7 @@ const CardBox = styled.div`
 
 CardList.propTypes = {
 	setPage: PropTypes.func.isRequired,
-	cardName: PropTypes.string.isRequired,
-	cardNumber: PropTypes.objectOf(PropTypes.string),
-	cardOwner: PropTypes.string.isRequired,
-	cardExpirationDate: PropTypes.objectOf(PropTypes.string),
+	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default CardList;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
@@ -6,9 +6,10 @@ import QuestionMark from "../../assets/question-circle-regular.svg";
 import InputWrapper from "../InputWrapper";
 import ToolTip from "../ToolTip";
 
-const CardSecureCodeInput = React.forwardRef((props, ref) => {
-	const { label, cardSecureCode, onChangeCardSecureCode } = props;
+const CardSecureCodeInput = forwardRef((props, ref) => {
+	const { label, cardInfo, onChangeCardInfo } = props;
 	const { cardPasswordRef } = ref;
+	const { secureCode } = cardInfo;
 	const [isToolTipOn, setIsToolTipOn] = useState(false);
 
 	const onChangeToolTip = () => {
@@ -16,17 +17,18 @@ const CardSecureCodeInput = React.forwardRef((props, ref) => {
 	};
 
 	const checkNumber = e => {
-		const { value } = e.target;
-		const isLessThreeDigits = e.target.value.length < 3;
-		const isThreeDigits = e.target.value.length === 3;
+		// const { value } = e.target;
+		// const isLessThreeDigits = e.target.value.length < 3;
+		// const isThreeDigits = e.target.value.length === 3;
 
-		if (isNaN(value)) return;
-		if (isLessThreeDigits) {
-			onChangeCardSecureCode(e);
-		} else if (isThreeDigits) {
-			onChangeCardSecureCode(e);
-			cardPasswordRef.current.focus();
-		}
+		onChangeCardInfo(e);
+		// if (isNaN(value)) return;
+		// if (isLessThreeDigits) {
+		// 	onChangeCardSecureCode(e);
+		// } else if (isThreeDigits) {
+		// 	onChangeCardSecureCode(e);
+		// 	cardPasswordRef.current.focus();
+		// }
 	};
 
 	return (
@@ -35,9 +37,10 @@ const CardSecureCodeInput = React.forwardRef((props, ref) => {
 				<S.Input
 					type="password"
 					id="cardSecureCode"
+					name="secureCode"
 					maxLength={3}
-					value={cardSecureCode}
-					onChange={e => checkNumber(e)}
+					value={secureCode}
+					onChange={checkNumber}
 					required
 				/>
 				<S.SVGWrapper
@@ -54,8 +57,8 @@ const CardSecureCodeInput = React.forwardRef((props, ref) => {
 
 CardSecureCodeInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	cardSecureCode: PropTypes.string.isRequired,
-	onChangeCardSecureCode: PropTypes.func.isRequired,
+	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardSecureCodeInput;

@@ -1,31 +1,31 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 
-import InputWrapper from "../InputWrapper";
 import * as S from "./style";
+import InputWrapper from "../InputWrapper";
 
-const CardOwnerInput = React.forwardRef((props, ref) => {
-	const { label, width, cardOwner, onChangeCardOwner } = props;
+const CardOwnerInput = forwardRef((props, ref) => {
+	const { label, cardInfo, onChangeCardInfo } = props;
 	const { cardOwnerRef } = ref;
+	const { owner } = cardInfo;
 
 	return (
 		<InputWrapper
 			label={label}
 			htmlFor="cardOwner"
-			width={width}
 			useToCount={true}
-			dataToCount={cardOwner}
+			dataToCount={owner}
 			limitToCount={30}
 		>
 			<div>
 				<S.Input
 					type="text"
-					width={width}
 					id="cardOwner"
+					name="owner"
 					maxLength={30}
 					placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-					value={cardOwner}
-					onChange={onChangeCardOwner}
+					value={owner}
+					onChange={onChangeCardInfo}
 					ref={cardOwnerRef}
 					required
 				/>
@@ -36,9 +36,8 @@ const CardOwnerInput = React.forwardRef((props, ref) => {
 
 CardOwnerInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	width: PropTypes.string.isRequired,
-	cardOwner: PropTypes.string.isRequired,
-	onChangeCardOwner: PropTypes.func.isRequired,
+	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardOwnerInput;

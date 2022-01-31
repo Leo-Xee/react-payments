@@ -1,50 +1,50 @@
-import React, { useRef } from "react";
+import React, { useRef, forwardRef } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
-import { FIRST, SECOND } from "../../config/constant";
 
-const CardPasswordInput = React.forwardRef((props, ref) => {
-	const { label, cardPassword, onChangeCardPassword } = props;
+const CardPasswordInput = forwardRef((props, ref) => {
+	const { label, cardInfo, onChangeCardInfo } = props;
 	const { cardPasswordRef } = ref;
+	const { firstPassword, secondPassword } = cardInfo;
 
 	const secondRef = useRef(null);
 
 	const checkNumber = e => {
-		const { name, value } = e.target;
+		// const { name, value } = e.target;
 
-		if (isNaN(value)) return;
-		onChangeCardPassword(e);
+		onChangeCardInfo(e);
+		// if (isNaN(value)) return;
+		// onChangeCardPassword(e);
 
-		if (+name === FIRST) {
-			secondRef.current.focus();
-		}
+		// if (+name === FIRST) {
+		// 	secondRef.current.focus();
+		// }
 
-		if (+name === SECOND) {
-			secondRef.current.blur();
-		}
+		// if (+name === SECOND) {
+		// 	secondRef.current.blur();
+		// }
 	};
 
 	return (
-		<InputWrapper htmlFor="cardPassword-frist" label={label}>
+		<InputWrapper htmlFor="cardPassword" label={label}>
 			<S.LayoutWrapper>
 				<S.Input
 					type="password"
-					id="cardPassword-frist"
-					name={FIRST}
+					id="cardPassword"
+					name="firstPassword"
 					maxLength={1}
-					value={cardPassword[FIRST]}
-					onChange={e => checkNumber(e)}
+					value={firstPassword}
+					onChange={checkNumber}
 					ref={cardPasswordRef}
 					required
 				/>
 				<S.Input
 					type="password"
-					id="cardPassword-second"
-					name={SECOND}
+					name="secondPassword"
 					maxLength={1}
-					value={cardPassword[SECOND]}
+					value={secondPassword}
 					onChange={e => checkNumber(e)}
 					ref={secondRef}
 					required
@@ -58,8 +58,8 @@ const CardPasswordInput = React.forwardRef((props, ref) => {
 
 CardPasswordInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	cardPassword: PropTypes.objectOf(PropTypes.string).isRequired,
-	onChangeCardPassword: PropTypes.func.isRequired,
+	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardPasswordInput;

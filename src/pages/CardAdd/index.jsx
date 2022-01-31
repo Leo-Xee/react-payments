@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import * as S from "./style";
 import TextButton from "../../components/TextButton";
-import { DONE, LIST, SECOND } from "../../config/constant";
+import { DONE, LIST } from "../../config/constant";
 import BackButton from "../../components/BackButton";
 import Card from "../../components/Card";
 import palette from "../../styles/global/palette";
@@ -13,42 +13,19 @@ import CardExpirationDateInput from "../../components/CardExpirationDateInput";
 import CardOwnerInput from "../../components/CardOwnerInput";
 import CardSecureCodeInput from "../../components/CardSecureCodeInput";
 import CardPasswordInput from "../../components/CardPasswordInput";
-import CardCompanyList from "../../components/CardCompanyList";
+// import CardCompanyList from "../../components/CardCompanyList";
 import ModalPortal from "../../components/Modal/ModalPortal";
 
-const CardAdd = props => {
-	const {
-		cardName,
-		cardNumber,
-		cardOwner,
-		cardExpirationDate,
-		cardSecureCode,
-		cardPassword,
-		onChangeCardNumber,
-		onChangeCardOwner,
-		onChangeCardExpirationDate,
-		onChangeCardSecureCode,
-		onChangeCardPassword,
-		setCardName,
-		setPage,
-	} = props;
-
+const CardAdd = ({ cardInfo, onChangeCardInfo, setPage }) => {
+	const { name } = cardInfo;
 	const [isModalOn, setIsModalOn] = useState(false);
 
-	useEffect(() => {
-		const modalTrigger = cardNumber[SECOND].length === 4;
-		if (modalTrigger) {
-			setIsModalOn(true);
-		}
-	}, [cardNumber[SECOND]]);
-
-	const onBack = () => {
-		setPage(LIST);
-	};
-
-	const onNext = () => {
-		setPage(DONE);
-	};
+	// useEffect(() => {
+	// 	const modalTrigger = cardNumber[SECOND].length === 4;
+	// 	if (modalTrigger) {
+	// 		setIsModalOn(true);
+	// 	}
+	// }, [cardNumber[SECOND]]);
 
 	const refsObj = {
 		cardNumberRef: useRef(null),
@@ -60,60 +37,59 @@ const CardAdd = props => {
 
 	const onSubmit = e => {
 		e.preventDefault();
-		onNext();
+		setPage(DONE);
 	};
 
 	return (
 		<div className="app">
 			<S.Header>
-				<BackButton onClick={onBack} />
+				<BackButton onClick={() => setPage(LIST)} />
 				<h1>카드 추가</h1>
 			</S.Header>
 			<S.CardBox>
 				<Card
 					size="small"
-					backgroundColor={palette[cardName]}
-					cardName={cardName}
-					cardNumber={cardNumber}
-					cardOwner={cardOwner}
-					cardExpirationDate={cardExpirationDate}
+					cardInfo={cardInfo}
+					backgroundColor={palette[name]}
 				/>
 			</S.CardBox>
+
 			<S.Form onSubmit={onSubmit}>
 				<CardNumberInput
 					label="카드 번호"
-					cardNumber={cardNumber}
-					onChangeCardNumber={onChangeCardNumber}
+					cardInfo={cardInfo}
+					onChangeCardInfo={onChangeCardInfo}
 					ref={refsObj}
 				/>
 				<CardExpirationDateInput
 					label="만료일"
-					cardExpirationDate={cardExpirationDate}
-					onChangeCardExpirationDate={onChangeCardExpirationDate}
+					cardInfo={cardInfo}
+					onChangeCardInfo={onChangeCardInfo}
 					ref={refsObj}
 				/>
 				<CardOwnerInput
 					label="카드 소유자 이름 (선택)"
-					width="318px"
-					cardOwner={cardOwner}
-					onChangeCardOwner={onChangeCardOwner}
+					cardInfo={cardInfo}
+					onChangeCardInfo={onChangeCardInfo}
 					ref={refsObj}
 				/>
 				<CardSecureCodeInput
 					label="보안 코드(CCV/CVV)"
-					cardSecureCode={cardSecureCode}
-					onChangeCardSecureCode={onChangeCardSecureCode}
+					cardInfo={cardInfo}
+					onChangeCardInfo={onChangeCardInfo}
 					ref={refsObj}
 				/>
 				<CardPasswordInput
 					label="카드 비밀번호"
-					cardPassword={cardPassword}
-					onChangeCardPassword={onChangeCardPassword}
+					cardInfo={cardInfo}
+					onChangeCardInfo={onChangeCardInfo}
 					ref={refsObj}
 				/>
 				<S.ButtonBox>
 					<TextButton type="submit" content="다음" color="#04C09E" />
 				</S.ButtonBox>
+			</S.Form>
+			{/*
 			</S.Form>
 			{isModalOn && (
 				<ModalPortal>
@@ -125,21 +101,15 @@ const CardAdd = props => {
 						/>
 					</Modal>
 				</ModalPortal>
-			)}
+			)} } */}
 		</div>
 	);
 };
 
 CardAdd.propTypes = {
-	cardName: PropTypes.string.isRequired,
-	cardNumber: PropTypes.objectOf(PropTypes.string),
-	cardOwner: PropTypes.string.isRequired,
-	cardExpirationDate: PropTypes.objectOf(PropTypes.string),
-	onChangeCardNumber: PropTypes.func.isRequired,
-	onChangeCardOwner: PropTypes.func.isRequired,
-	onChangeCardExpirationDate: PropTypes.func.isRequired,
+	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+	onChangeCardInfo: PropTypes.func.isRequired,
 	setPage: PropTypes.func.isRequired,
-	setCardName: PropTypes.func.isRequired,
 };
 
 export default CardAdd;
