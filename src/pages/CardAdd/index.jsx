@@ -13,19 +13,19 @@ import CardExpirationDateInput from "../../components/CardExpirationDateInput";
 import CardOwnerInput from "../../components/CardOwnerInput";
 import CardSecureCodeInput from "../../components/CardSecureCodeInput";
 import CardPasswordInput from "../../components/CardPasswordInput";
-// import CardCompanyList from "../../components/CardCompanyList";
+import CardCompanyList from "../../components/CardCompanyList";
 import ModalPortal from "../../components/Modal/ModalPortal";
 
 const CardAdd = ({ cardInfo, onChangeCardInfo, setPage }) => {
-	const { name } = cardInfo;
+	const { name, secondNum } = cardInfo;
 	const [isModalOn, setIsModalOn] = useState(false);
 
-	// useEffect(() => {
-	// 	const modalTrigger = cardNumber[SECOND].length === 4;
-	// 	if (modalTrigger) {
-	// 		setIsModalOn(true);
-	// 	}
-	// }, [cardNumber[SECOND]]);
+	useEffect(() => {
+		const modalTrigger = secondNum.length === 4;
+		if (modalTrigger) {
+			setIsModalOn(true);
+		}
+	}, [secondNum]);
 
 	const refsObj = {
 		cardNumberRef: useRef(null),
@@ -89,19 +89,17 @@ const CardAdd = ({ cardInfo, onChangeCardInfo, setPage }) => {
 					<TextButton type="submit" content="다음" color="#04C09E" />
 				</S.ButtonBox>
 			</S.Form>
-			{/*
-			</S.Form>
 			{isModalOn && (
 				<ModalPortal>
 					<Modal setIsModalOn={setIsModalOn}>
 						<CardCompanyList
 							setIsModalOn={setIsModalOn}
-							setCardName={setCardName}
+							onChangeCardInfo={onChangeCardInfo}
 							ref={refsObj}
 						/>
 					</Modal>
 				</ModalPortal>
-			)} } */}
+			)}
 		</div>
 	);
 };

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import CircleButton from "../CircleButton";
 import palette from "../../styles/global/palette";
 
-const CardCompanyList = React.forwardRef((props, ref) => {
-	const { setCardName, setIsModalOn } = props;
+const CardCompanyList = forwardRef((props, ref) => {
+	const { setIsModalOn, onChangeCardInfo } = props;
 	const { cardNumberRef } = ref;
 	const companyList = [
 		"포코",
@@ -20,7 +20,7 @@ const CardCompanyList = React.forwardRef((props, ref) => {
 	];
 
 	const selectCompany = (_, val) => {
-		setCardName(val);
+		onChangeCardInfo(null, ["name", val]);
 		setIsModalOn(false);
 		cardNumberRef.current.focus();
 	};
@@ -41,7 +41,7 @@ const CardCompanyList = React.forwardRef((props, ref) => {
 });
 
 CardCompanyList.propTypes = {
-	setCardName: PropTypes.func.isRequired,
+	onChangeCardInfo: PropTypes.func.isRequired,
 	setIsModalOn: PropTypes.func.isRequired,
 };
 
