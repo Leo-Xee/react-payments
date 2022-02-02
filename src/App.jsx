@@ -34,7 +34,13 @@ const App = () => {
 						onChangeCardInfo={onChangeCardInfo}
 					/>
 				)}
-				{page === DONE && <CardDone setPage={setPage} />}
+				{page === DONE && (
+					<CardDone
+						setPage={setPage}
+						cardInfo={cardInfo}
+						onChangeCardInfo={onChangeCardInfo}
+					/>
+				)}
 				<div id="modal"></div>
 			</div>
 		</div>
