@@ -1,52 +1,47 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
+import * as S from "./style";
 import CardButton from "../../components/CardButton";
 import { ADD } from "../../config/constant";
 import Card from "../../components/Card";
+import { cardColors } from "../../styles/global/palette";
 
-const CardList = ({ setPage, cardInfo }) => {
-	const onClick = () => {
+const CardList = ({ setPage, cardList }) => {
+	const nextId = useRef(0);
+
+	const onNext = () => {
 		setPage(ADD);
 	};
 
 	return (
 		<div className="app">
-			<StyledHeader>
+			<S.Header>
 				<h1 className="page-title">보유카드</h1>
-			</StyledHeader>
-			<CardBox>
-				<Card size="small" cardInfo={cardInfo} />
-			</CardBox>
-			<CardBox>
-				<CardButton onClick={onClick} />
-			</CardBox>
+			</S.Header>
+			{cardList.map(card => {
+				nextId.current++;
+				return (
+					<S.CardBox key={nextId}>
+						<Card
+							size="small"
+							cardInfo={card}
+							backgroundColor={cardColors[card.name]}
+						/>
+						<S.Alias>{card.alias}</S.Alias>
+					</S.CardBox>
+				);
+			})}
+			<S.CardBox>
+				<CardButton onClick={onNext} />
+			</S.CardBox>
 		</div>
 	);
 };
 
-const StyledHeader = styled.header`
-	display: flex;
-	padding: 10px 5px;
-	font-size: 16px;
-
-	h1 {
-		padding-left: 15px;
-	}
-`;
-
-const CardBox = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin-top: 60px;
-`;
-
 CardList.propTypes = {
 	setPage: PropTypes.func.isRequired,
-	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+	cardList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };
 
 export default CardList;

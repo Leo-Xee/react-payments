@@ -5,13 +5,17 @@ import * as S from "./style";
 import TextButton from "../../components/TextButton";
 import Card from "../../components/Card";
 import { LIST } from "../../config/constant";
-import palette from "../../styles/global/palette";
+import { basicColors, cardColors } from "../../styles/global/palette";
 import CardAliasInput from "../../components/CardAliasInput";
 
-const CardDone = ({ setPage, cardInfo, onChangeCardInfo }) => {
-	const { name } = cardInfo;
+const CardDone = props => {
+	const { setPage, cardInfo, onChangeCardInfo, reset, setCardList } = props;
+	const { name, alias } = cardInfo;
 
-	const onSubmit = () => {
+	const onSubmit = e => {
+		e.preventDefault();
+		setCardList(prev => [{ ...cardInfo, alias: alias || name }, ...prev]);
+		reset();
 		setPage(LIST);
 	};
 
@@ -24,7 +28,7 @@ const CardDone = ({ setPage, cardInfo, onChangeCardInfo }) => {
 				<Card
 					size="large"
 					cardInfo={cardInfo}
-					backgroundColor={palette[name]}
+					backgroundColor={cardColors[name]}
 				/>
 			</S.CardBox>
 			<S.Form onSubmit={onSubmit}>
@@ -33,7 +37,11 @@ const CardDone = ({ setPage, cardInfo, onChangeCardInfo }) => {
 					onChangeCardInfo={onChangeCardInfo}
 				/>
 				<S.ButtonBox>
-					<TextButton type="submit" content="확인" color="#04C09E" />
+					<TextButton
+						type="submit"
+						content="확인"
+						color={basicColors.textBtn}
+					/>
 				</S.ButtonBox>
 			</S.Form>
 		</div>
@@ -44,6 +52,8 @@ CardDone.propTypes = {
 	setPage: PropTypes.func.isRequired,
 	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
 	onChangeCardInfo: PropTypes.func.isRequired,
+	reset: PropTypes.func.isRequired,
+	setCardList: PropTypes.func.isRequired,
 };
 
 export default CardDone;

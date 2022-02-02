@@ -8,7 +8,8 @@ import { ADD, DONE, LIST } from "./config/constant";
 
 const App = () => {
 	const [page, setPage] = useState(LIST); // list -> add -> done
-	const [cardInfo, onChangeCardInfo] = useForm({
+	const [cardList, setCardList] = useState([]);
+	const [cardInfo, onChangeCardInfo, reset] = useForm({
 		name: "",
 		firstNum: "",
 		secondNum: "",
@@ -26,7 +27,7 @@ const App = () => {
 	return (
 		<div className="root-container">
 			<div className="root">
-				{page === LIST && <CardList setPage={setPage} cardInfo={cardInfo} />}
+				{page === LIST && <CardList setPage={setPage} cardList={cardList} />}
 				{page === ADD && (
 					<CardAdd
 						setPage={setPage}
@@ -39,6 +40,8 @@ const App = () => {
 						setPage={setPage}
 						cardInfo={cardInfo}
 						onChangeCardInfo={onChangeCardInfo}
+						reset={reset}
+						setCardList={setCardList}
 					/>
 				)}
 				<div id="modal"></div>

@@ -39,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
   .app {
     height: 100%;
     padding: 16px 28px;
+    overflow: auto;
   }
 `;
 
