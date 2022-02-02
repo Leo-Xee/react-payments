@@ -52,41 +52,41 @@ const CardNumberInput = forwardRef((props, ref) => {
 					id="cardNumber"
 					name="firstNum"
 					value={firstNum}
+					pattern="^[0-9]{0,4}$"
 					onChange={onChangeNumber}
 					ref={refs[0]}
 					data-num={1}
 					autoFocus
-					required
 				/>
 				<S.Divider>-</S.Divider>
 				<S.Input
 					type="text"
 					name="secondNum"
 					value={secondNum}
+					pattern="^[0-9]{0,4}$"
 					onChange={onChangeNumber}
 					ref={refs[1]}
 					data-num={2}
-					required
 				/>
 				<S.Divider>-</S.Divider>
 				<S.Input
 					type="password"
 					name="thirdNum"
 					value={thirdNum}
+					pattern="^[0-9]{0,4}$"
 					onChange={onChangeNumber}
 					ref={refs[2]}
 					data-num={3}
-					required
 				/>
 				<S.Divider>-</S.Divider>
 				<S.Input
 					type="password"
 					name="fourthNum"
 					value={fourthNum}
+					pattern="^[0-9]{0,4}$"
 					onChange={onChangeNumber}
 					ref={refs[3]}
 					data-num={4}
-					required
 				/>
 			</S.LayoutWrapper>
 		</InputWrapper>

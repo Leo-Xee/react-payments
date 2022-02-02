@@ -51,6 +51,7 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 					placeholder="MM"
 					name="monthExpiration"
 					value={monthExpiration}
+					pattern="^(0[1-9]|1[012]|[0-1]|)$"
 					onChange={onChangeDate}
 					ref={cardExpirationDateRef}
 					data-num={1}
@@ -61,6 +62,7 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 					placeholder="YY"
 					name="yearExpiration"
 					value={yearExpiration}
+					pattern="^(2[2-9]|[3-9][0-9]|[0-9]|)$"
 					onChange={onChangeDate}
 					ref={yearRef}
 					data-num={2}
