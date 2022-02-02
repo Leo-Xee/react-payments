@@ -6,7 +6,7 @@ import TextButton from "../../components/TextButton";
 import { DONE, LIST } from "../../config/constant";
 import BackButton from "../../components/BackButton";
 import Card from "../../components/Card";
-import palette from "../../styles/global/palette";
+import { cardColors } from "../../styles/global/palette";
 import Modal from "../../components/Modal";
 import CardNumberInput from "../../components/CardNumberInput";
 import CardExpirationDateInput from "../../components/CardExpirationDateInput";
@@ -49,7 +49,7 @@ const CardAdd = ({ cardInfo, onChangeCardInfo, setPage }) => {
 				<Card
 					size="small"
 					cardInfo={cardInfo}
-					backgroundColor={palette[name]}
+					backgroundColor={cardColors[name]}
 				/>
 			</S.CardBox>
 

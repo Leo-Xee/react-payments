@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
-import palette from "../../styles/global/palette";
+import { cardColors } from "../../styles/global/palette";
 
 const Card = ({ cardInfo, size, backgroundColor }) => {
 	const {
@@ -45,7 +45,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-	backgroundColor: palette.DEFAULT,
+	backgroundColor: cardColors.DEFAULT,
 };
 
 export default Card;

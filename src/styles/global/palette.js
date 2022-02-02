@@ -1,4 +1,4 @@
-export default {
+export const cardColors = {
 	DEFAULT: "#D2D2D2",
 	포코: "#E24141",
 	준: "#547CE4",
@@ -8,4 +8,9 @@ export default {
 	도비: "#E76E9A",
 	콜린: "#F37D3B",
 	썬: "#FBCD58",
+};
+
+export const basicColors = {
+	font: "#575757",
+	textBtn: "#04C09E",
 };

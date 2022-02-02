@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import * as S from "./style";
 import CircleButton from "../CircleButton";
-import palette from "../../styles/global/palette";
+import { cardColors } from "../../styles/global/palette";
 
 const CardCompanyList = forwardRef((props, ref) => {
 	const { setIsModalOn, onChangeCardInfo } = props;
@@ -31,7 +31,7 @@ const CardCompanyList = forwardRef((props, ref) => {
 				<S.ListItem key={idx}>
 					<CircleButton
 						title={val}
-						backgroundColor={palette[val]}
+						backgroundColor={cardColors[val]}
 						onClick={e => selectCompany(e, val)}
 					/>
 				</S.ListItem>
