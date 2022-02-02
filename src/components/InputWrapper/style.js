@@ -56,6 +56,7 @@ export const DefalutStyledInput = styled(DefaultInput)`
 `;
 
 export const InputWrapper = styled.div`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 `;
@@ -72,6 +73,15 @@ export const Label = styled(DefaultLabel)`
 
 export const InputContainer = styled.div`
 	display: flex;
+`;
+
+export const ErrorMsgContainer = styled.div`
+	display: flex;
+	justify-content: start;
+	position: absolute;
+	bottom: -18px;
+	color: red;
+	font-size: 0.75rem;
 `;
 
 export const Counter = styled.div`

@@ -18,11 +18,14 @@ export const CardBox = styled.div`
 
 export const Form = styled.form`
 	& > div:not(:last-child) {
-		margin-bottom: 12px;
+		margin-bottom: 18px;
 	}
 `;
 
 export const ButtonBox = styled.div`
+	position: absolute;
+	right: 25px;
+	bottom: 25px;
 	display: flex;
 	justify-content: end;
 `;

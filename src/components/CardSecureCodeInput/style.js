@@ -13,5 +13,5 @@ export const Input = styled(DefalutStyledInput)`
 export const SVGWrapper = styled.div`
 	cursor: pointer;
 	position: absolute;
-	left: 120px;
+	left: 100px;
 `;
