@@ -26,7 +26,6 @@ export const isValidInput = e => {
 
 	if (nums.includes(name)) {
 		const regex = /^\d{0,4}$/;
-
 		return regex.test(value);
 	}
 
@@ -46,6 +45,11 @@ export const isValidInput = e => {
 
 	if (name === "secureCode") {
 		const regex = /^\d{0,3}$/;
+		return regex.test(value);
+	}
+
+	if (passwords.includes(name)) {
+		const regex = /^\d{0,1}$/;
 		return regex.test(value);
 	}
 };
