@@ -8,7 +8,7 @@ import ToolTip from "../ToolTip";
 
 const CardSecureCodeInput = forwardRef((props, ref) => {
 	const { label, cardInfo, onChangeCardInfo } = props;
-	const { cardPasswordRef } = ref;
+	const { cardSecureCodeRef, cardPasswordRef } = ref;
 	const { secureCode } = cardInfo;
 	const [isToolTipOn, setIsToolTipOn] = useState(false);
 
@@ -41,6 +41,7 @@ const CardSecureCodeInput = forwardRef((props, ref) => {
 					maxLength={3}
 					value={secureCode}
 					onChange={checkNumber}
+					ref={cardSecureCodeRef}
 					required
 				/>
 				<S.SVGWrapper

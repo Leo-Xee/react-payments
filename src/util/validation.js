@@ -29,4 +29,18 @@ export const isValidInput = e => {
 
 		return regex.test(value);
 	}
+
+	if (expirations.includes(name)) {
+		const regex = /^\d{0,2}$/;
+
+		if (name === expirations[0]) {
+			if (value > 12) return;
+		}
+		if (name === expirations[1]) {
+			if (value.length === 2 && value < 22) return;
+			if (value > 99) return;
+		}
+
+		return regex.test(value);
+	}
 };

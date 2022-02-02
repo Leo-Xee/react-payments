@@ -1,46 +1,49 @@
-import React, { useRef, forwardRef } from "react";
+import React, { useState, useRef, forwardRef } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
+import { isValidInput, getErrorMessage } from "../../util/validation";
 
 const CardExpirationDateInput = forwardRef((props, ref) => {
 	const { label, cardInfo, onChangeCardInfo } = props;
-	const { cardExpirationDateRef, cardOwnerRef } = ref;
+	const { cardExpirationDateRef, cardSecureCodeRef } = ref;
 	const { monthExpiration, yearExpiration } = cardInfo;
+	const [errorMsg, setErrorMsg] = useState(null);
 
 	const yearRef = useRef(null);
+	const refs = [cardExpirationDateRef, yearRef];
 
-	const checkDateInput = e => {
-		const { name, value, min, max } = e.target;
-		const isLessTwoDigits = value.length < 2;
+	const onChangeDate = e => {
+		const { value } = e.target;
 		const isTwoDigits = value.length === 2;
-		const isVaildMonth = value >= min && value <= max;
-		const isVaildYear = value >= min && value <= max;
+
+		if (!isValidInput(e)) {
+			setErrorMsg(getErrorMessage(e));
+			return;
+		} else {
+			setErrorMsg(null);
+		}
+
+		if (isTwoDigits) onFocus(e);
 
 		onChangeCardInfo(e);
+	};
 
-		// if (isLessTwoDigits) {
-		// 	onChangeCardExpirationDate(e);
-		// }
+	const onFocus = e => {
+		const { dataset } = e.target;
+		const idx = dataset.num;
 
-		// if (name === MONTH) {
-		// 	if (isVaildMonth && isTwoDigits) {
-		// 		onChangeCardExpirationDate(e);
-		// 		yearRef.current.focus();
-		// 	}
-		// }
-
-		// if (name === YEAR) {
-		// 	if (isVaildYear && isTwoDigits) {
-		// 		onChangeCardExpirationDate(e);
-		// 		cardOwnerRef.current.focus();
-		// }
-		// }
+		if (idx <= 1) {
+			refs[idx].current.focus();
+		} else {
+			refs[idx - 1].current.blur();
+			cardSecureCodeRef.current.focus();
+		}
 	};
 
 	return (
-		<InputWrapper htmlFor="cardExpiration" label={label}>
+		<InputWrapper htmlFor="cardExpiration" label={label} errorMsg={errorMsg}>
 			<S.LayoutWrapper>
 				<S.Input
 					type="text"
@@ -48,8 +51,9 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 					placeholder="MM"
 					name="monthExpiration"
 					value={monthExpiration}
-					onChange={checkDateInput}
+					onChange={onChangeDate}
 					ref={cardExpirationDateRef}
+					data-num={1}
 				/>
 				<S.Divider>/</S.Divider>
 				<S.Input
@@ -57,8 +61,9 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 					placeholder="YY"
 					name="yearExpiration"
 					value={yearExpiration}
-					onChange={checkDateInput}
+					onChange={onChangeDate}
 					ref={yearRef}
+					data-num={2}
 				/>
 			</S.LayoutWrapper>
 		</InputWrapper>

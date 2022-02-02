@@ -30,7 +30,6 @@ const CardAdd = ({ cardInfo, onChangeCardInfo, setPage }) => {
 	const refsObj = {
 		cardNumberRef: useRef(null),
 		cardExpirationDateRef: useRef(null),
-		cardOwnerRef: useRef(null),
 		cardSecureCodeRef: useRef(null),
 		cardPasswordRef: useRef(null),
 	};
