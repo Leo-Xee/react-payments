@@ -53,6 +53,7 @@ const CardPasswordInput = forwardRef((props, ref) => {
 					onChange={onChangePassword}
 					ref={cardPasswordRef}
 					data-num={1}
+					required
 				/>
 				<S.Input
 					type="password"
@@ -62,6 +63,7 @@ const CardPasswordInput = forwardRef((props, ref) => {
 					onChange={onChangePassword}
 					ref={secondPasswordRef}
 					data-num={2}
+					required
 				/>
 				<S.Dot width="7px" height="7px" />
 				<S.Dot width="7px" height="7px" />

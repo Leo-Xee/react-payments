@@ -10,19 +10,14 @@ const invalidMessages = {
 	secondPassword: "0 ~ 9 사이의 숫자를 입력하세요.",
 };
 
-const expirations = ["monthExpiration", "yearExpiration"];
-
 export const getErrorMessage = e => {
 	const { name } = e.target;
 	return invalidMessages[name];
 };
 
 export const isValidInput = e => {
-	const { name, value, pattern } = e.target;
-	console.log(name, value, pattern);
+	const { value, pattern } = e.target;
 	const regex = new RegExp(pattern);
 
 	return regex.test(value);
 };
-
-export const isValidSubmit = () => {};

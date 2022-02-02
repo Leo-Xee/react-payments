@@ -55,6 +55,7 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 					onChange={onChangeDate}
 					ref={cardExpirationDateRef}
 					data-num={1}
+					required
 				/>
 				<S.Divider>/</S.Divider>
 				<S.Input
@@ -66,6 +67,7 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 					onChange={onChangeDate}
 					ref={yearRef}
 					data-num={2}
+					required
 				/>
 			</S.LayoutWrapper>
 		</InputWrapper>

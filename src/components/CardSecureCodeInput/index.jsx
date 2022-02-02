@@ -50,6 +50,7 @@ const CardSecureCodeInput = forwardRef((props, ref) => {
 					pattern="^[0-9]{0,3}$"
 					onChange={onChangeCode}
 					ref={cardSecureCodeRef}
+					required
 				/>
 				<S.SVGWrapper
 					onMouseEnter={onChangeToolTip}

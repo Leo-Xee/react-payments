@@ -27,6 +27,7 @@ const CardOwnerInput = forwardRef((props, ref) => {
 					value={owner}
 					onChange={onChangeCardInfo}
 					ref={cardOwnerRef}
+					required
 				/>
 			</div>
 		</InputWrapper>
