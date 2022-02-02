@@ -43,4 +43,9 @@ export const isValidInput = e => {
 
 		return regex.test(value);
 	}
+
+	if (name === "secureCode") {
+		const regex = /^\d{0,3}$/;
+		return regex.test(value);
+	}
 };

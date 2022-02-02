@@ -5,34 +5,41 @@ import * as S from "./style";
 import QuestionMark from "../../assets/question-circle-regular.svg";
 import InputWrapper from "../InputWrapper";
 import ToolTip from "../ToolTip";
+import { getErrorMessage, isValidInput } from "../../util/validation";
 
 const CardSecureCodeInput = forwardRef((props, ref) => {
 	const { label, cardInfo, onChangeCardInfo } = props;
 	const { cardSecureCodeRef, cardPasswordRef } = ref;
 	const { secureCode } = cardInfo;
 	const [isToolTipOn, setIsToolTipOn] = useState(false);
+	const [errorMsg, setErrorMsg] = useState(null);
 
 	const onChangeToolTip = () => {
 		setIsToolTipOn(!isToolTipOn);
 	};
 
-	const checkNumber = e => {
-		// const { value } = e.target;
-		// const isLessThreeDigits = e.target.value.length < 3;
-		// const isThreeDigits = e.target.value.length === 3;
+	const onChangeCode = e => {
+		const { value } = e.target;
+		const isThreeDigits = value.length === 3;
+
+		if (!isValidInput(e)) {
+			setErrorMsg(getErrorMessage(e));
+			return;
+		} else {
+			setErrorMsg(null);
+		}
+
+		if (isThreeDigits) onFocus(e);
 
 		onChangeCardInfo(e);
-		// if (isNaN(value)) return;
-		// if (isLessThreeDigits) {
-		// 	onChangeCardSecureCode(e);
-		// } else if (isThreeDigits) {
-		// 	onChangeCardSecureCode(e);
-		// 	cardPasswordRef.current.focus();
-		// }
+	};
+
+	const onFocus = e => {
+		cardPasswordRef.current.focus();
 	};
 
 	return (
-		<InputWrapper htmlFor="cardSecureCode" label={label}>
+		<InputWrapper htmlFor="cardSecureCode" label={label} errorMsg={errorMsg}>
 			<S.LayoutWrapper>
 				<S.Input
 					type="password"
@@ -40,7 +47,7 @@ const CardSecureCodeInput = forwardRef((props, ref) => {
 					name="secureCode"
 					maxLength={3}
 					value={secureCode}
-					onChange={checkNumber}
+					onChange={onChangeCode}
 					ref={cardSecureCodeRef}
 					required
 				/>
