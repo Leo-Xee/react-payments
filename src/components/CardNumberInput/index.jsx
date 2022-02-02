@@ -1,67 +1,71 @@
-import React, { useRef, forwardRef } from "react";
+import React, { useRef, forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
+import { getErrorMessage, isValidInput } from "../../util/validation";
 
 const CardNumberInput = forwardRef((props, ref) => {
 	const { label, cardInfo, onChangeCardInfo } = props;
 	const { cardNumberRef, cardExpirationDateRef } = ref;
 	const { firstNum, secondNum, thirdNum, fourthNum } = cardInfo;
+	const [errorMsg, setErrorMsg] = useState(null);
 
 	const firstRef = useRef(null);
 	const secondRef = useRef(null);
 	const fourthRef = useRef(null);
 	const refs = [firstRef, secondRef, cardNumberRef, fourthRef];
 
-	// onChange **
-	// check
-	// focus
-	const checkNumber = e => {
-		const { name: idx, value } = e.target;
-		const isLessFourDigits = e.target.value.length < 4;
-		const isFourDigits = e.target.value.length === 4;
+	const onChangeNumber = e => {
+		const { value } = e.target;
+		const isFourDigits = value.length === 4;
+
+		if (!isValidInput(e)) {
+			setErrorMsg(getErrorMessage(e));
+			return;
+		} else {
+			setErrorMsg(null);
+		}
+
+		if (isFourDigits) onFocus(e);
 
 		onChangeCardInfo(e);
-
-		// if (isNaN(value)) return;
-		// if (isLessFourDigits) {
-		// 	onChangeCardNumber(e);
-		// }
-		// if (isFourDigits) {
-		// 	onChangeCardNumber(e);
-		// 	idx <= THIRD ? moveFocus(idx) : jumpFocus();
-		// }
 	};
 
-	const moveFocus = idx => {
-		refs[idx].current.focus();
-	};
+	const onFocus = e => {
+		const { dataset } = e.target;
+		const idx = dataset.num;
 
-	const jumpFocus = () => {
-		cardExpirationDateRef.current.focus();
+		if (idx <= 3) {
+			refs[idx].current.focus();
+		} else {
+			refs[idx - 1].current.blur();
+			cardExpirationDateRef.current.focus();
+		}
 	};
 
 	return (
-		<InputWrapper htmlFor="cardNumber" label={label}>
+		<InputWrapper htmlFor="cardNumber" label={label} errorMsg={errorMsg}>
 			<S.LayoutWrapper>
 				<S.Input
-					type="number"
+					type="text"
 					id="cardNumber"
 					name="firstNum"
 					value={firstNum}
-					onChange={checkNumber}
+					onChange={onChangeNumber}
 					ref={refs[0]}
+					data-num={1}
 					autoFocus
 					required
 				/>
 				<S.Divider>-</S.Divider>
 				<S.Input
-					type="number"
+					type="text"
 					name="secondNum"
 					value={secondNum}
-					onChange={checkNumber}
+					onChange={onChangeNumber}
 					ref={refs[1]}
+					data-num={2}
 					required
 				/>
 				<S.Divider>-</S.Divider>
@@ -69,8 +73,9 @@ const CardNumberInput = forwardRef((props, ref) => {
 					type="password"
 					name="thirdNum"
 					value={thirdNum}
-					onChange={checkNumber}
+					onChange={onChangeNumber}
 					ref={refs[2]}
+					data-num={3}
 					required
 				/>
 				<S.Divider>-</S.Divider>
@@ -78,8 +83,9 @@ const CardNumberInput = forwardRef((props, ref) => {
 					type="password"
 					name="fourthNum"
 					value={fourthNum}
-					onChange={checkNumber}
+					onChange={onChangeNumber}
 					ref={refs[3]}
+					data-num={4}
 					required
 				/>
 			</S.LayoutWrapper>
