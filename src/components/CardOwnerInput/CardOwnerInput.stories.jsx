@@ -10,7 +10,6 @@ const Template = args => {
 	const refsObj = {
 		cardNumberRef: useRef(null),
 		cardExpirationDateRef: useRef(null),
-		cardOwnerRef: useRef(null),
 		cardSecureCodeRef: useRef(null),
 		cardPasswordRef: useRef(null),
 	};
@@ -20,5 +19,7 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
 	label: "카드 소유자 이름 (선택)",
-	cardOwner: "",
+	cardInfo: {
+		owner: "레오",
+	},
 };

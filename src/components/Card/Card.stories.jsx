@@ -1,12 +1,4 @@
 import React from "react";
-import {
-	FIRST,
-	FOURTH,
-	MONTH,
-	SECOND,
-	THIRD,
-	YEAR,
-} from "../../config/constant";
 import Card from "./index";
 
 export default {
@@ -18,15 +10,19 @@ const Template = args => <Card {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-	cardName: "로이드카드",
-	cardNumber: {
-		[FIRST]: "1111",
-		[SECOND]: "2222",
-		[THIRD]: "3333",
-		[FOURTH]: "4444",
+	cardInfo: {
+		name: "로이드",
+		firstNum: "1111",
+		secondNum: "2222",
+		thirdNum: "3333",
+		fourthNum: "4444",
+		owner: "NAME",
+		monthExpiration: "10",
+		yearExpiration: "23",
+		secureCode: "123",
+		firstPassword: "",
+		secondPassword: "",
 	},
-	cardOwner: "NAME",
-	cardExpirationDate: { [MONTH]: "10", [YEAR]: "23" },
 };
 
 export const Small = Template.bind({});

@@ -1,13 +1,5 @@
 import React, { useRef } from "react";
 import CardAdd from "./index";
-import {
-	FIRST,
-	FOURTH,
-	MONTH,
-	SECOND,
-	THIRD,
-	YEAR,
-} from "../../config/constant";
 
 export default {
 	title: "pages/CardAdd",
@@ -25,28 +17,38 @@ const Template = args => {
 
 	return <CardAdd {...args} ref={refsObj} />;
 };
+
 export const Default = Template.bind({});
 Default.args = {
-	cardName: "로이드",
-	cardNumber: {
-		[FIRST]: "1111",
-		[SECOND]: "222",
-		[THIRD]: "",
-		[FOURTH]: "",
+	cardInfo: {
+		name: "로이드",
+		firstNum: "1111",
+		secondNum: "",
+		thirdNum: "",
+		fourthNum: "",
+		owner: "Leo",
+		monthExpiration: "12",
+		yearExpiration: "23",
+		secureCode: "123",
+		firstPassword: "1",
+		secondPassword: "2",
 	},
-	cardOwner: "",
-	cardExpirationDate: { [MONTH]: "10", [YEAR]: "23" },
-	cardPassword: { [FIRST]: "", [SECOND]: "" },
 };
 
 export const ModalOn = Template.bind({});
 ModalOn.args = {
 	...Default.args,
-
-	cardNumber: {
-		[FIRST]: "1111",
-		[SECOND]: "2222",
-		[THIRD]: "",
-		[FOURTH]: "",
+	cardInfo: {
+		name: "로이드",
+		firstNum: "1111",
+		secondNum: "2222",
+		thirdNum: "",
+		fourthNum: "",
+		owner: "",
+		monthExpiration: "",
+		yearExpiration: "",
+		secureCode: "",
+		firstPassword: "",
+		secondPassword: "",
 	},
 };

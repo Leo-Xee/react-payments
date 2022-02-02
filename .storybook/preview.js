@@ -6,7 +6,12 @@ export const decorators = [
 		<>
 			<GlobalFonts />
 			<GlobalStyle />
-			<Story />
+			<div className="root-container">
+				<div className="root">
+					<Story />
+					<div id="modal"></div>
+				</div>
+			</div>
 		</>
 	),
 ];

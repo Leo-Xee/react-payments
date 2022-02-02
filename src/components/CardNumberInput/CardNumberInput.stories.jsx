@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import CardNumberInput from "./index";
-import { FIRST, FOURTH, SECOND, THIRD } from "../../../config/constant";
 
 export default {
 	title: "components/CardNumberInput",
@@ -21,10 +20,10 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
 	label: "카드번호",
-	cardNumber: {
-		[FIRST]: "1111",
-		[SECOND]: "2222",
-		[THIRD]: "3333",
-		[FOURTH]: "4444",
+	cardInfo: {
+		firstNum: "1111",
+		secondNum: "2222",
+		thirdNum: "3333",
+		fourthNum: "4444",
 	},
 };
