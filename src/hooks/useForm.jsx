@@ -16,7 +16,7 @@ const useForm = initialState => {
 	};
 
 	const reset = () => {
-		setForm(inititalState);
+		setForm(initialState);
 	};
 
 	return [form, onChange, reset];
