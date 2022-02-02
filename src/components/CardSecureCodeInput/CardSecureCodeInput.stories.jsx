@@ -4,6 +4,13 @@ import CardSecureCodeInput from "./index";
 export default {
 	title: "components/CardSecureCodeInput",
 	component: CardSecureCodeInput,
+	decorators: [
+		Story => (
+			<div style={{ margin: "2rem" }}>
+				<Story />
+			</div>
+		),
+	],
 };
 
 const Template = args => {

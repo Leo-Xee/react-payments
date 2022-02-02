@@ -4,6 +4,13 @@ import CardNumberInput from "./index";
 export default {
 	title: "components/CardNumberInput",
 	component: CardNumberInput,
+	decorators: [
+		Story => (
+			<div style={{ margin: "2rem" }}>
+				<Story />
+			</div>
+		),
+	],
 };
 
 const Template = args => {

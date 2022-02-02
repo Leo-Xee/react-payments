@@ -4,6 +4,13 @@ import CardPasswordInput from "./index";
 export default {
 	title: "components/CardPasswordInput",
 	component: CardPasswordInput,
+	decorators: [
+		Story => (
+			<div style={{ margin: "2rem" }}>
+				<Story />
+			</div>
+		),
+	],
 };
 
 const Template = args => {

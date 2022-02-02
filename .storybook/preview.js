@@ -8,24 +8,15 @@ export const decorators = [
 			<GlobalStyle />
 			<div className="root-container">
 				<div className="root">
-					<Story />
+					<div>
+						<Story />
+					</div>
 					<div id="modal"></div>
 				</div>
 			</div>
 		</>
 	),
 ];
-
-const customViewports = {
-	mobile: {
-		name: "mobile",
-		styles: {
-			width: "375px",
-			height: "700px",
-		},
-		type: "mobile",
-	},
-};
 
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -36,8 +27,4 @@ export const parameters = {
 		},
 	},
 	layout: "fullscreen",
-	viewport: {
-		viewports: customViewports,
-		defaultViewport: "mobile",
-	},
 };

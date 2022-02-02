@@ -4,6 +4,13 @@ import CardExpirationDateInput from "./index";
 export default {
 	title: "components/cardExpirationDateInput",
 	component: CardExpirationDateInput,
+	decorators: [
+		Story => (
+			<div style={{ margin: "2rem" }}>
+				<Story />
+			</div>
+		),
+	],
 };
 
 const Template = args => {

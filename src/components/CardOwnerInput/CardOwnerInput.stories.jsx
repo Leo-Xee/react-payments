@@ -4,6 +4,13 @@ import CardOwnerInput from "./index";
 export default {
 	title: "components/CardOwnerInput",
 	component: CardOwnerInput,
+	decorators: [
+		Story => (
+			<div style={{ margin: "2rem" }}>
+				<Story />
+			</div>
+		),
+	],
 };
 
 const Template = args => {

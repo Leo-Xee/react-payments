@@ -4,6 +4,13 @@ import Card from "./index";
 export default {
 	title: "components/Card",
 	component: Card,
+	decorators: [
+		Story => (
+			<div style={{ margin: "2rem" }}>
+				<Story />
+			</div>
+		),
+	],
 };
 
 const Template = args => <Card {...args} />;
