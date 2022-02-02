@@ -9,46 +9,55 @@ export const Card = styled.div`
 	background-color: ${({ backgroundColor }) => backgroundColor};
 	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 	border-radius: 5px;
-`;
 
-export const CardName = styled.div`
-	position: absolute;
-	top: 14px;
-	left: 14px;
+	.Card_name {
+		position: absolute;
+		top: 14px;
+		left: 14px;
 
-	font-size: 0.75rem;
-`;
+		font-size: ${({ size }) => (size === "large" ? "0.875rem" : "0.75rem")};
+	}
 
-export const Chip = styled.div`
-	position: absolute;
-	top: 47px;
-	left: 14px;
+	.Card_chip {
+		position: absolute;
+		top: ${({ size }) => (size === "large" ? "64px" : "47px")};
+		left: ${({ size }) => (size === "large" ? "20px" : "14px")};
 
-	width: 40px;
-	height: 26px;
+		width: ${({ size }) => (size === "large" ? "55px" : "40px")};
+		height: ${({ size }) => (size === "large" ? "35px" : "26px")};
 
-	background-color: #cbba64;
-	border-radius: 4px;
-`;
+		background-color: #cbba64;
+		border-radius: 4px;
+	}
 
-export const CardNumber = styled.div`
-	position: absolute;
-	top: 78px;
-	left: 28px;
-`;
+	.Card_number {
+		position: absolute;
+		top: ${({ size }) => (size === "large" ? "112px" : "78px")};
+		left: ${({ size }) => (size === "large" ? "12px" : "16px")};
+		font-size: ${({ size }) => (size === "large" ? "1.125rem" : "1rem")};
 
-export const CardOwner = styled.div`
-	position: absolute;
-	bottom: 10px;
-	left: 20px;
+		& span {
+			letter-spacing: 1px;
+			text-align: center;
+		}
+		& span:not(first-child) {
+			margin-left: ${({ size }) => (size === "large" ? "20px" : "6px")};
+		}
+	}
 
-	font-size: 0.75rem;
-`;
+	.Card_owner {
+		position: absolute;
+		bottom: 10px;
+		left: 20px;
 
-export const CardExpirationDate = styled.div`
-	position: absolute;
-	bottom: 10px;
-	right: 20px;
+		font-size: ${({ size }) => (size === "large" ? "1rem" : "0.75rem")};
+	}
 
-	font-size: 0.75rem;
+	.Card_expirationDate {
+		position: absolute;
+		bottom: 10px;
+		right: 20px;
+
+		font-size: ${({ size }) => (size === "large" ? "1rem" : "0.75rem")};
+	}
 `;

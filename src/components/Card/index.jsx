@@ -22,17 +22,18 @@ const Card = ({ cardInfo, size, backgroundColor }) => {
 
 	return (
 		<S.Card size={size} backgroundColor={backgroundColor}>
-			<S.CardName>{name && `${name} 카드`}</S.CardName>
-			<S.Chip />
-			<S.CardNumber>
-				{`${firstNum}  ${secondNum} 
-				 ${changeToSecureCode(thirdNum)}  
-			   ${changeToSecureCode(fourthNum)}`}
-			</S.CardNumber>
-			<S.CardOwner>{owner || "NAME"}</S.CardOwner>
-			<S.CardExpirationDate>
+			<div className="Card_name">{name && `${name} 카드`}</div>
+			<div className="Card_chip" />
+			<div className="Card_number">
+				<span>{firstNum}</span>
+				<span>{secondNum}</span>
+				<span>{changeToSecureCode(thirdNum)}</span>
+				<span>{changeToSecureCode(fourthNum)}</span>
+			</div>
+			<div className="Card_owner">{owner || "NAME"}</div>
+			<div className="Card_expirationDate">
 				{`${monthExpiration || "MM"}/${yearExpiration || "YY"}`}
-			</S.CardExpirationDate>
+			</div>
 		</S.Card>
 	);
 };
