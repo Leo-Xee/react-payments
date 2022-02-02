@@ -14,10 +14,10 @@ const CardAliasInput = ({ cardInfo, onChangeCardInfo }) => {
 					type="text"
 					id="cardAlias"
 					name="alias"
+					placeholder="카드 별칭 (선택)"
 					value={alias}
 					onChange={onChangeCardInfo}
 					maxlength={10}
-					required
 				/>
 			</InputWrapper>
 		</>
