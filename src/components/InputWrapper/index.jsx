@@ -4,8 +4,15 @@ import PropTypes from "prop-types";
 import * as S from "./style";
 
 const InputWrapper = props => {
-	const { label, htmlFor, children, useToCount, dataToCount, limitToCount } =
-		props;
+	const {
+		label,
+		htmlFor,
+		children,
+		useToCount,
+		dataToCount,
+		limitToCount,
+		errorMsg,
+	} = props;
 
 	return (
 		<S.InputWrapper>
@@ -16,6 +23,7 @@ const InputWrapper = props => {
 				)}
 			</S.LabelContainer>
 			<S.InputContainer>{children}</S.InputContainer>
+			<S.ErrorMsgContainer>{errorMsg}</S.ErrorMsgContainer>
 		</S.InputWrapper>
 	);
 };
@@ -26,6 +34,7 @@ InputWrapper.propTypes = {
 	children: PropTypes.node.isRequired,
 	useToCount: PropTypes.bool,
 	dataToCount: PropTypes.string,
+	errorMsg: PropTypes.string,
 };
 
 export default InputWrapper;

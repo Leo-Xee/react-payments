@@ -12,7 +12,7 @@ const useForm = initialState => {
 
 		const { name, value } = e.target;
 		setForm(form => ({ ...form, [name]: value }));
-		console.log(form);
+		console.log({ [name]: value });
 	};
 
 	const reset = () => {
