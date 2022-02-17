@@ -6,7 +6,7 @@ import * as S from "./style";
 const Modal = props => {
 	const { children, setIsModalOn } = props;
 
-	const onClose = e => {
+	const onClose = () => {
 		setIsModalOn(false);
 	};
 

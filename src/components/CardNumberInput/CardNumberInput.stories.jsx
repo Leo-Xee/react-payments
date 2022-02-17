@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
+
 import CardNumberInput from "./index";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 export default {
 	title: "components/CardNumberInput",
@@ -13,6 +15,15 @@ export default {
 	],
 };
 
+const context = {
+	cardInfo: {
+		firstNum: "1234",
+		secondNum: "1234",
+		thirdNum: "1234",
+		fourthNum: "1234",
+	},
+};
+
 const Template = args => {
 	const refsObj = {
 		cardNumberRef: useRef(null),
@@ -21,7 +32,11 @@ const Template = args => {
 		cardSecureCodeRef: useRef(null),
 		cardPasswordRef: useRef(null),
 	};
-	return <CardNumberInput {...args} ref={refsObj} />;
+	return (
+		<CardInfoContext.Provider value={context}>
+			<CardNumberInput {...args} ref={refsObj} />
+		</CardInfoContext.Provider>
+	);
 };
 
 export const Default = Template.bind({});

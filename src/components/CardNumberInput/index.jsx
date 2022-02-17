@@ -1,36 +1,23 @@
-import React, { useRef, forwardRef, useState } from "react";
+import React, { useRef, forwardRef, useState, useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
 import { getErrorMessage, isValidInput } from "../../util/validation";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
-const CardNumberInput = forwardRef((props, ref) => {
-	const { label, cardInfo, onChangeCardInfo } = props;
+const CardNumberInput = forwardRef(({ label }, ref) => {
+	const {
+		cardInfo: { firstNum, secondNum, thirdNum, fourthNum },
+		onChangeCardInfo,
+	} = useContext(CardInfoContext);
 	const { cardNumberRef, cardExpirationDateRef } = ref;
-	const { firstNum, secondNum, thirdNum, fourthNum } = cardInfo;
 	const [errorMsg, setErrorMsg] = useState(null);
 
 	const firstRef = useRef(null);
 	const secondRef = useRef(null);
 	const fourthRef = useRef(null);
 	const refs = [firstRef, secondRef, cardNumberRef, fourthRef];
-
-	const onChangeNumber = e => {
-		const { value } = e.target;
-		const isFourDigits = value.length === 4;
-
-		if (!isValidInput(e)) {
-			setErrorMsg(getErrorMessage(e));
-			return;
-		} else {
-			setErrorMsg(null);
-		}
-
-		if (isFourDigits) onFocus(e);
-
-		onChangeCardInfo(e);
-	};
 
 	const onFocus = e => {
 		const { dataset } = e.target;
@@ -42,6 +29,21 @@ const CardNumberInput = forwardRef((props, ref) => {
 			refs[idx - 1].current.blur();
 			cardExpirationDateRef.current.focus();
 		}
+	};
+
+	const onChangeNumber = e => {
+		const { value } = e.target;
+		const isFourDigits = value.length === 4;
+
+		if (!isValidInput(e)) {
+			setErrorMsg(getErrorMessage(e));
+			return;
+		}
+		setErrorMsg(null);
+
+		if (isFourDigits) onFocus(e);
+
+		onChangeCardInfo(e);
 	};
 
 	return (
@@ -99,8 +101,6 @@ const CardNumberInput = forwardRef((props, ref) => {
 
 CardNumberInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardNumberInput;
