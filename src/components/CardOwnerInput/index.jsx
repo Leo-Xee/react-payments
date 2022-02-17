@@ -1,19 +1,22 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
-const CardOwnerInput = forwardRef((props, ref) => {
-	const { label, cardInfo, onChangeCardInfo } = props;
+const CardOwnerInput = forwardRef(({ label }, ref) => {
+	const {
+		cardInfo: { owner },
+		onChangeCardInfo,
+	} = useContext(CardInfoContext);
 	const { cardOwnerRef } = ref;
-	const { owner } = cardInfo;
 
 	return (
 		<InputWrapper
 			label={label}
 			htmlFor="cardOwner"
-			useToCount={true}
+			useToCount
 			dataToCount={owner}
 			limitToCount={30}
 		>
@@ -35,8 +38,6 @@ const CardOwnerInput = forwardRef((props, ref) => {
 
 CardOwnerInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardOwnerInput;
