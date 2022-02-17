@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef, useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
@@ -6,16 +6,23 @@ import QuestionMark from "../../assets/question-circle-regular.svg";
 import InputWrapper from "../InputWrapper";
 import ToolTip from "../ToolTip";
 import { getErrorMessage, isValidInput } from "../../util/validation";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
-const CardSecureCodeInput = forwardRef((props, ref) => {
-	const { label, cardInfo, onChangeCardInfo } = props;
+const CardSecureCodeInput = forwardRef(({ label }, ref) => {
+	const {
+		cardInfo: { secureCode },
+		onChangeCardInfo,
+	} = useContext(CardInfoContext);
 	const { cardSecureCodeRef, cardPasswordRef } = ref;
-	const { secureCode } = cardInfo;
 	const [isToolTipOn, setIsToolTipOn] = useState(false);
 	const [errorMsg, setErrorMsg] = useState(null);
 
 	const onChangeToolTip = () => {
 		setIsToolTipOn(!isToolTipOn);
+	};
+
+	const onFocus = () => {
+		cardPasswordRef.current.focus();
 	};
 
 	const onChangeCode = e => {
@@ -25,17 +32,12 @@ const CardSecureCodeInput = forwardRef((props, ref) => {
 		if (!isValidInput(e)) {
 			setErrorMsg(getErrorMessage(e));
 			return;
-		} else {
-			setErrorMsg(null);
 		}
+		setErrorMsg(null);
 
 		if (isThreeDigits) onFocus(e);
 
 		onChangeCardInfo(e);
-	};
-
-	const onFocus = e => {
-		cardPasswordRef.current.focus();
 	};
 
 	return (
@@ -66,8 +68,6 @@ const CardSecureCodeInput = forwardRef((props, ref) => {
 
 CardSecureCodeInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardSecureCodeInput;
