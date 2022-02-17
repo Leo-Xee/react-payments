@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
+
 import CardList from "./index";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 export default {
 	title: "pages/CardList",
 	component: CardList,
 };
-
-const Template = args => <CardList {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
+const context = {
 	cardList: [
 		{
 			name: "로이드",
@@ -42,3 +40,21 @@ Default.args = {
 		},
 	],
 };
+
+const Template = args => {
+	const refsObj = {
+		cardNumberRef: useRef(null),
+		cardExpirationDateRef: useRef(null),
+		cardOwnerRef: useRef(null),
+		cardSecureCodeRef: useRef(null),
+		cardPasswordRef: useRef(null),
+	};
+	return (
+		<CardInfoContext.Provider value={context}>
+			<CardList {...args} ref={refsObj} />
+		</CardInfoContext.Provider>
+	);
+};
+
+export const Default = Template.bind({});
+Default.args = {};

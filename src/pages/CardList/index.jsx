@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
@@ -6,8 +6,10 @@ import CardButton from "../../components/CardButton";
 import { ADD } from "../../config/constant";
 import Card from "../../components/Card";
 import { cardColors } from "../../styles/global/palette";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
-const CardList = ({ setPage, cardList }) => {
+const CardList = ({ setPage }) => {
+	const { cardList } = useContext(CardInfoContext);
 	const nextId = useRef(0);
 
 	const onNext = () => {
@@ -20,7 +22,7 @@ const CardList = ({ setPage, cardList }) => {
 				<h1 className="page-title">보유카드</h1>
 			</S.Header>
 			{cardList.map(card => {
-				nextId.current++;
+				nextId.current += 1;
 				return (
 					<S.CardBox key={nextId}>
 						<Card
@@ -41,7 +43,6 @@ const CardList = ({ setPage, cardList }) => {
 
 CardList.propTypes = {
 	setPage: PropTypes.func.isRequired,
-	cardList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };
 
 export default CardList;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
@@ -7,9 +7,11 @@ import Card from "../../components/Card";
 import { LIST } from "../../config/constant";
 import { basicColors, cardColors } from "../../styles/global/palette";
 import CardAliasInput from "../../components/CardAliasInput";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
-const CardDone = props => {
-	const { setPage, cardInfo, onChangeCardInfo, reset, setCardList } = props;
+const CardDone = ({ setPage }) => {
+	const { cardInfo, onChangeCardInfo, reset, setCardList } =
+		useContext(CardInfoContext);
 	const { name, alias } = cardInfo;
 
 	const onSubmit = e => {
@@ -50,10 +52,6 @@ const CardDone = props => {
 
 CardDone.propTypes = {
 	setPage: PropTypes.func.isRequired,
-	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-	onChangeCardInfo: PropTypes.func.isRequired,
-	reset: PropTypes.func.isRequired,
-	setCardList: PropTypes.func.isRequired,
 };
 
 export default CardDone;
