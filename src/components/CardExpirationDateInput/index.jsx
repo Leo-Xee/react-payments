@@ -1,34 +1,21 @@
-import React, { useState, useRef, forwardRef } from "react";
+import React, { useState, useRef, forwardRef, useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
 import { isValidInput, getErrorMessage } from "../../util/validation";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
-const CardExpirationDateInput = forwardRef((props, ref) => {
-	const { label, cardInfo, onChangeCardInfo } = props;
+const CardExpirationDateInput = forwardRef(({ label }, ref) => {
+	const {
+		cardInfo: { monthExpiration, yearExpiration },
+		onChangeCardInfo,
+	} = useContext(CardInfoContext);
 	const { cardExpirationDateRef, cardSecureCodeRef } = ref;
-	const { monthExpiration, yearExpiration } = cardInfo;
 	const [errorMsg, setErrorMsg] = useState(null);
 
 	const yearRef = useRef(null);
 	const refs = [cardExpirationDateRef, yearRef];
-
-	const onChangeDate = e => {
-		const { value } = e.target;
-		const isTwoDigits = value.length === 2;
-
-		if (!isValidInput(e)) {
-			setErrorMsg(getErrorMessage(e));
-			return;
-		} else {
-			setErrorMsg(null);
-		}
-
-		if (isTwoDigits) onFocus(e);
-
-		onChangeCardInfo(e);
-	};
 
 	const onFocus = e => {
 		const { dataset } = e.target;
@@ -40,6 +27,21 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 			refs[idx - 1].current.blur();
 			cardSecureCodeRef.current.focus();
 		}
+	};
+
+	const onChangeDate = e => {
+		const { value } = e.target;
+		const isTwoDigits = value.length === 2;
+
+		if (!isValidInput(e)) {
+			setErrorMsg(getErrorMessage(e));
+			return;
+		}
+		setErrorMsg(null);
+
+		if (isTwoDigits) onFocus(e);
+
+		onChangeCardInfo(e);
 	};
 
 	return (
@@ -76,8 +78,6 @@ const CardExpirationDateInput = forwardRef((props, ref) => {
 
 CardExpirationDateInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardExpirationDateInput;
