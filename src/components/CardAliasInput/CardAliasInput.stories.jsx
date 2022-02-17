@@ -16,6 +16,7 @@ export default {
 };
 
 const context = {
+	onChangeCardInfo: () => {},
 	cardInfo: {
 		alias: "쇼핑용",
 	},

@@ -1,7 +1,6 @@
 import React from "react";
 
 import Card from "./index";
-import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 export default {
 	title: "components/Card",
@@ -15,8 +14,13 @@ export default {
 	],
 };
 
-const context = {
-	cardList: [],
+const Template = args => {
+	return <Card {...args} />;
+};
+
+export const Default = Template.bind({});
+Default.args = {
+	size: "small",
 	cardInfo: {
 		name: "포코",
 		firstNum: "1234",
@@ -32,17 +36,6 @@ const context = {
 		alias: "",
 	},
 };
-
-const Template = args => {
-	return (
-		<CardInfoContext.Provider value={context}>
-			<Card {...args} />
-		</CardInfoContext.Provider>
-	);
-};
-
-export const Default = Template.bind({});
-Default.args = {};
 
 export const Small = Template.bind({});
 Small.args = {

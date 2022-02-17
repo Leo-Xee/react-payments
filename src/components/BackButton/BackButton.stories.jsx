@@ -16,4 +16,6 @@ export default {
 const Template = args => <BackButton {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+	onClick: () => {},
+};

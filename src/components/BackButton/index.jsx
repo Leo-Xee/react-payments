@@ -4,7 +4,7 @@ import Back from "../../assets/chevron-left-solid.svg";
 
 const BackButton = ({ onClick }) => {
 	return (
-		<button onClick={onClick}>
+		<button type="button" onClick={onClick}>
 			<Back width="15" height="20" />
 		</button>
 	);

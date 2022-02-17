@@ -42,10 +42,4 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
 	label: "카드번호",
-	cardInfo: {
-		firstNum: "1111",
-		secondNum: "2222",
-		thirdNum: "3333",
-		fourthNum: "4444",
-	},
 };
