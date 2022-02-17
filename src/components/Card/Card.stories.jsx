@@ -18,7 +18,7 @@ export default {
 const context = {
 	cardList: [],
 	cardInfo: {
-		name: "",
+		name: "포코",
 		firstNum: "1234",
 		secondNum: "1234",
 		thirdNum: "1234",
@@ -42,19 +42,7 @@ const Template = args => {
 };
 
 export const Default = Template.bind({});
-Default.args = {
-	name: "로이드",
-	firstNum: "1111",
-	secondNum: "2222",
-	thirdNum: "3333",
-	fourthNum: "4444",
-	owner: "NAME",
-	monthExpiration: "10",
-	yearExpiration: "23",
-	secureCode: "123",
-	firstPassword: "",
-	secondPassword: "",
-};
+Default.args = {};
 
 export const Small = Template.bind({});
 Small.args = {

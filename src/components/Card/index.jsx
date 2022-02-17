@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
-import { CardInfoContext } from "../../contexts/cardInfoContext";
 import { cardColors } from "../../styles/global/palette";
 
-const Card = ({ size, backgroundColor }) => {
-	const { cardInfo } = useContext(CardInfoContext);
+const Card = ({ cardInfo, size, backgroundColor }) => {
 	const {
 		name,
 		firstNum,
@@ -43,6 +41,7 @@ const Card = ({ size, backgroundColor }) => {
 Card.propTypes = {
 	size: PropTypes.string.isRequired,
 	backgroundColor: PropTypes.string,
+	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 Card.defaultProps = {

@@ -1,5 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
+
 import CardAliasInput from "./index";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 export default {
 	title: "components/CardAliasInput",
@@ -13,11 +15,18 @@ export default {
 	],
 };
 
-const Template = args => <CardAliasInput {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
+const context = {
 	cardInfo: {
-		alias: "",
+		alias: "쇼핑용",
 	},
 };
+
+const Template = args => {
+	return (
+		<CardInfoContext.Provider value={context}>
+			<CardAliasInput {...args} />
+		</CardInfoContext.Provider>
+	);
+};
+export const Default = Template.bind({});
+Default.args = {};
