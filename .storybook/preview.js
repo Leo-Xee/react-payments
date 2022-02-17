@@ -8,9 +8,7 @@ export const decorators = [
 			<GlobalStyle />
 			<div className="root-container">
 				<div className="root">
-					<div>
-						<Story />
-					</div>
+					<Story />
 					<div id="modal"></div>
 				</div>
 			</div>
