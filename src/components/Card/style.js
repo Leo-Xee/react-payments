@@ -10,6 +10,23 @@ export const Card = styled.div`
 	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 	border-radius: 5px;
 
+	.Card_deleteBtn {
+		visibility: hidden;
+		position: absolute;
+		width: 24px;
+		height: 24px;
+		background-color: #f1f3f5;
+		border-radius: 4px;
+		top: 10px;
+		right: 10px;
+		user-select: none;
+	}
+	&:hover {
+		.Card_deleteBtn {
+			visibility: visible;
+		}
+	}
+
 	.Card_name {
 		position: absolute;
 		top: 14px;

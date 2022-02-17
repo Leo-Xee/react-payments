@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
@@ -10,7 +10,6 @@ import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 const CardList = ({ setPage }) => {
 	const { cardList } = useContext(CardInfoContext);
-	const nextId = useRef(0);
 
 	const onNext = () => {
 		setPage(ADD);
@@ -22,12 +21,12 @@ const CardList = ({ setPage }) => {
 				<h1 className="page-title">보유카드</h1>
 			</S.Header>
 			{cardList.map(card => {
-				nextId.current += 1;
 				return (
-					<S.CardBox key={nextId}>
+					<S.CardBox key={card.id}>
 						<Card
 							size="small"
 							cardInfo={card}
+							type="button"
 							backgroundColor={cardColors[card.name]}
 						/>
 						<S.Alias>{card.alias}</S.Alias>

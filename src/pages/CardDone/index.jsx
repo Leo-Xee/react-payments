@@ -10,13 +10,17 @@ import CardAliasInput from "../../components/CardAliasInput";
 import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 const CardDone = ({ setPage }) => {
-	const { cardInfo, onChangeCardInfo, reset, setCardList } =
+	const { nextId, cardInfo, onChangeCardInfo, reset, setCardList } =
 		useContext(CardInfoContext);
 	const { name, alias } = cardInfo;
 
 	const onSubmit = e => {
 		e.preventDefault();
-		setCardList(prev => [{ ...cardInfo, alias: alias || name }, ...prev]);
+		nextId.current += 1;
+		setCardList(prev => [
+			{ ...cardInfo, alias: alias || name, id: nextId.current },
+			...prev,
+		]);
 		reset();
 		setPage(LIST);
 	};
@@ -29,6 +33,7 @@ const CardDone = ({ setPage }) => {
 			<S.CardBox>
 				<Card
 					size="large"
+					type="view"
 					cardInfo={cardInfo}
 					backgroundColor={cardColors[name]}
 				/>
