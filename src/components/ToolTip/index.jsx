@@ -5,7 +5,7 @@ import CCV from "../../assets/tooltip.png";
 const ToolTip = () => {
 	return (
 		<Wrapper>
-			<img src={CCV} alt="CCV/CVV example image" />
+			<img src={CCV} alt="CCV/CVV example" />
 		</Wrapper>
 	);
 };
