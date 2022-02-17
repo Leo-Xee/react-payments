@@ -1,34 +1,21 @@
-import React, { useState, useRef, forwardRef } from "react";
+import React, { useState, useRef, forwardRef, useContext } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./style";
 import InputWrapper from "../InputWrapper";
 import { getErrorMessage, isValidInput } from "../../util/validation";
+import { CardInfoContext } from "../../contexts/cardInfoContext";
 
-const CardPasswordInput = forwardRef((props, ref) => {
-	const { label, cardInfo, onChangeCardInfo } = props;
+const CardPasswordInput = forwardRef(({ label }, ref) => {
+	const {
+		cardInfo: { firstPassword, secondPassword },
+		onChangeCardInfo,
+	} = useContext(CardInfoContext);
 	const { cardPasswordRef } = ref;
-	const { firstPassword, secondPassword } = cardInfo;
 	const [errorMsg, setErrorMsg] = useState(null);
 
 	const secondPasswordRef = useRef(null);
 	const refs = [cardPasswordRef, secondPasswordRef];
-
-	const onChangePassword = e => {
-		const { value } = e.target;
-		const isOneDigit = value.length === 1;
-
-		if (!isValidInput(e)) {
-			setErrorMsg(getErrorMessage(e));
-			return;
-		} else {
-			setErrorMsg(null);
-		}
-
-		if (isOneDigit) onFocus(e);
-
-		onChangeCardInfo(e);
-	};
 
 	const onFocus = e => {
 		const { dataset } = e.target;
@@ -39,6 +26,21 @@ const CardPasswordInput = forwardRef((props, ref) => {
 		} else {
 			refs[idx - 1].current.blur();
 		}
+	};
+
+	const onChangePassword = e => {
+		const { value } = e.target;
+		const isOneDigit = value.length === 1;
+
+		if (!isValidInput(e)) {
+			setErrorMsg(getErrorMessage(e));
+			return;
+		}
+		setErrorMsg(null);
+
+		if (isOneDigit) onFocus(e);
+
+		onChangeCardInfo(e);
 	};
 
 	return (
@@ -74,8 +76,6 @@ const CardPasswordInput = forwardRef((props, ref) => {
 
 CardPasswordInput.propTypes = {
 	label: PropTypes.string.isRequired,
-	cardInfo: PropTypes.objectOf(PropTypes.string).isRequired,
-	onChangeCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardPasswordInput;
