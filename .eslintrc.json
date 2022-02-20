@@ -28,6 +28,8 @@
 		"react/jsx-no-constructed-context-values": 0,
 		"react/no-array-index-key": 0,
 		"import/prefer-default-export": 0,
-		"no-shadow": 0
+		"no-shadow": 0,
+		"no-undef": 0,
+		"react/require-default-props": 0
 	}
 }
