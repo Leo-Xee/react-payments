@@ -3,10 +3,15 @@ import { useState } from "react";
 const useForm = initialState => {
 	const [form, setForm] = useState(initialState);
 
-	const onChange = (e, arr) => {
-		if (arr) {
-			const [name, value] = arr;
+	const onChange = (e, param) => {
+		if (Array.isArray(param)) {
+			const [name, value] = param;
 			setForm(form => ({ ...form, [name]: value }));
+			return;
+		}
+
+		if (typeof param === "object") {
+			setForm(param);
 			return;
 		}
 

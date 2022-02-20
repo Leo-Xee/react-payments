@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 import * as S from "./style";
 import { cardColors } from "../../styles/global/palette";
 import { CardInfoContext } from "../../contexts/cardInfoContext";
+import { DONE } from "../../config/constant";
 
-const Card = ({ type, cardInfo, size, backgroundColor }) => {
-	const { setCardList } = useContext(CardInfoContext);
+const Card = ({ type, setPage, cardInfo, size, backgroundColor }) => {
+	const { onChangeCardInfo, cardList, setCardList } =
+		useContext(CardInfoContext);
 	const {
 		id,
 		name,
@@ -23,10 +25,15 @@ const Card = ({ type, cardInfo, size, backgroundColor }) => {
 		return "*".repeat(numbers.length);
 	};
 
-	const onDelete = e => {
-		if (e.target.className !== "Card_deleteBtn") return;
+	const onDeleteAndEdit = e => {
 		const id = Number(e.currentTarget.dataset.id);
-		setCardList(prev => prev.filter(card => card.id !== id));
+		if (e.target.className === "Card_deleteBtn") {
+			setCardList(prev => prev.filter(card => card.id !== id));
+		} else {
+			const cardInfo = cardList.find(card => card.id === id);
+			onChangeCardInfo(null, { ...cardInfo });
+			setPage(DONE);
+		}
 	};
 
 	return (
@@ -51,7 +58,7 @@ const Card = ({ type, cardInfo, size, backgroundColor }) => {
 				<S.Card
 					size={size}
 					backgroundColor={backgroundColor}
-					onClick={onDelete}
+					onClick={onDeleteAndEdit}
 					data-id={id}
 				>
 					<button className="Card_deleteBtn" type="button">
@@ -77,6 +84,7 @@ const Card = ({ type, cardInfo, size, backgroundColor }) => {
 
 Card.propTypes = {
 	type: PropTypes.string.isRequired,
+	setPage: PropTypes.func,
 	size: PropTypes.string.isRequired,
 	backgroundColor: PropTypes.string,
 	cardInfo: PropTypes.shape({

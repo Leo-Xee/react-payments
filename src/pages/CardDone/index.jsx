@@ -10,17 +10,41 @@ import CardAliasInput from "../../components/CardAliasInput";
 import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 const CardDone = ({ setPage }) => {
-	const { nextId, cardInfo, onChangeCardInfo, reset, setCardList } =
+	const { nextId, cardInfo, onChangeCardInfo, reset, cardList, setCardList } =
 		useContext(CardInfoContext);
 	const { name, alias } = cardInfo;
 
-	const onSubmit = e => {
-		e.preventDefault();
+	const editAlias = idx => {
+		if (idx) {
+			setCardList(prev =>
+				prev.map(card => {
+					if (card.id === cardInfo.id) {
+						return {
+							...cardInfo,
+						};
+					}
+					return card;
+				}),
+			);
+		}
+	};
+
+	const addCard = () => {
 		nextId.current += 1;
 		setCardList(prev => [
 			{ ...cardInfo, alias: alias || name, id: nextId.current },
 			...prev,
 		]);
+	};
+
+	const onSubmit = e => {
+		e.preventDefault();
+		const idx = cardList.findIndex(card => card.id === cardInfo.id);
+		if (idx) {
+			editAlias(idx);
+		} else {
+			addCard();
+		}
 		reset();
 		setPage(LIST);
 	};

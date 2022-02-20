@@ -27,6 +27,7 @@ const CardList = ({ setPage }) => {
 							size="small"
 							cardInfo={card}
 							type="button"
+							setPage={setPage}
 							backgroundColor={cardColors[card.name]}
 						/>
 						<S.Alias>{card.alias}</S.Alias>

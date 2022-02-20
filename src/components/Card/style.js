@@ -13,18 +13,23 @@ export const Card = styled.div`
 	.Card_deleteBtn {
 		visibility: hidden;
 		position: absolute;
-		width: 24px;
-		height: 24px;
-		background-color: #f1f3f5;
 		border-radius: 4px;
-		top: 10px;
-		right: 10px;
+		top: 12px;
+		right: 16px;
 		user-select: none;
 	}
+
+	& {
+		transition: transform 0.2s ease-out;
+	}
+
 	&:hover {
 		.Card_deleteBtn {
 			visibility: visible;
 		}
+		cursor: pointer;
+		transform: scale(1.01);
+		transition: transform 0.2s ease-out;
 	}
 
 	.Card_name {

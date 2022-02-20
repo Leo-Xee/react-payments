@@ -18,10 +18,9 @@ import ModalPortal from "../../components/Modal/ModalPortal";
 import { CardInfoContext } from "../../contexts/cardInfoContext";
 
 const CardAdd = ({ setPage }) => {
-	const { cardInfo, cardList } = useContext(CardInfoContext);
+	const { cardInfo } = useContext(CardInfoContext);
 	const { name, secondNum } = cardInfo;
 	const [isModalOn, setIsModalOn] = useState(false);
-	console.log(cardList);
 
 	useEffect(() => {
 		const modalTrigger = secondNum.length === 4;
